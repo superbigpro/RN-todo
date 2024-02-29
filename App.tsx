@@ -25,6 +25,8 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
+import { theme } from './color';
+
 type SectionProps = PropsWithChildren<{
   title: string;
 }>;
@@ -37,41 +39,31 @@ function App(): React.JSX.Element {
   };
 
   return (
-    <View style={styles.sectionContainer}>
-      <View style={styles.subContainer}>
-        <Text>ㅎㅇ</Text>
-      </View>
-      <View style={styles.subContainer}>
-        <Text>헬로</Text>
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.btnText}>Work</Text>
+        <Text style={styles.btnText}>Hard</Text>
       </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  subContainer:{
-    flex: 2,
-  },
-  mainContainer:{
+  container:{
     flex: 1,
-    fontSize: 32
+    backgroundColor: theme.background,
+    paddingHorizontal: 25
   },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+  header:{
+    justifyContent: "space-between",
+    flexDirection:"row",
+    marginTop:100,
   },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
+  btnText:{
+    fontSize:40,
+    color:"white",
+    fontWeight:"600",
+  }
 });
 
 export default App;
