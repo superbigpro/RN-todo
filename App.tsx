@@ -15,6 +15,7 @@ import {
   Text,
   useColorScheme,
   View,
+  TouchableOpacity
 } from 'react-native';
 
 import {
@@ -41,8 +42,12 @@ function App(): React.JSX.Element {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.btnText}>Work</Text>
-        <Text style={styles.btnText}>Hard</Text>
+        <TouchableOpacity>
+          <Text style={styles.btnText}>Work</Text>
+        </TouchableOpacity>
+        <TouchableOpacity>
+          <Text style={styles.btnText}>Hard</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -61,7 +66,7 @@ const styles = StyleSheet.create({
   },
   btnText:{
     fontSize:40,
-    color:"white",
+    color: "white",
     fontWeight:"600",
   }
 });
