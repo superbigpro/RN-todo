@@ -44,7 +44,10 @@ function App(): React.JSX.Element {
     if (text === ""){
       return 
     }
-    const newTodos = Object.assign({}, todos, {[Date.now()]: {text, work: working}})
+    const newToDos = {
+      ...todos,
+      [Date.now()]: { text, work: working },
+      };
     setText("");
   }
 
@@ -64,13 +67,12 @@ function App(): React.JSX.Element {
           placeholder={working ? "Add a To do" : "Where do you want to go?"}
           onChangeText={onChangeText}
           returnKeyType="done"
-          clearTextOnFocus
           style={styles.input} />
       </View>
       <ScrollView>
         {Object.keys(todos).map((key) => (
-          <View key={key as string}>
-            <Text>{todos[key].text}</Text>
+          <View style={styles.todo} key={key as string}>
+            <Text style={styles.todoText}>{todos[key].text}</Text>
           </View>
         ))}        
       </ScrollView>
@@ -101,6 +103,12 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     marginTop: 15,
     fontSize: 15
+  },
+  todo:{
+
+  },
+  todoText:{
+    color:"white",
   }
 });
 
