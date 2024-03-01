@@ -46,7 +46,7 @@ function App(): React.JSX.Element {
     }
     const newToDos = {
       ...todos,
-      [Date.now()]: { text, work: working },
+      [Date.now()]: { text, working },
       };
       setTodos(newToDos)
     setText("");
@@ -71,12 +71,13 @@ function App(): React.JSX.Element {
           clearTextOnFocus
           style={styles.input} />
       </View>
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         {Object.keys(todos).map((key) => (
+          todos[key].working === working ?
           <View style={styles.todo} key={key as string}>
             <Text style={styles.todoText}>{todos[key].text}</Text>
-          </View>
-        ))}        
+          </View>: null
+        ))} 
       </ScrollView>
     </View>
   );
@@ -108,13 +109,15 @@ const styles = StyleSheet.create({
     marginBottom:25,
   },
   todo:{
-    backgroundColor:"white",
-    marginTop:15,
+    backgroundColor: theme.todoBg,
+    marginVertical:6,
     padding:25,
-    borderRadius: 20,
+    borderRadius: 17,
   },
   todoText:{
-    
+    color: "white",
+    fontWeight: "500",
+    fontSize: 15,
   }
 });
 
