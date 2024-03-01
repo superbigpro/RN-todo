@@ -42,10 +42,10 @@ function App(): React.JSX.Element {
     <View style={styles.container}>
       <View style={styles.header}>
         <TouchableOpacity onPress={work}>
-          <Text style={styles.btnText}>Work</Text>
+          <Text style={{...styles.btnText, color : working ? "white": theme.grey}}>Work</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={travel}>
-          <Text style={styles.btnText}>Travel</Text>
+        <Text style={{...styles.btnText, color : working ? theme.grey: "white"}}>Travel</Text>
         </TouchableOpacity>
       </View>
     </View>
