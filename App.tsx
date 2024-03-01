@@ -35,9 +35,18 @@ type SectionProps = PropsWithChildren<{
 
 function App(): React.JSX.Element {
   const [working, setWorking] = useState(true);
-
   const travel = () => setWorking(false);
   const work = () => setWorking(true);
+  const [text, setText] = useState("");
+  const [todos, setTodos] = useState({});
+  const onChangeText = (payload: string) => setText(payload);
+  const addTodo = () => {
+    if (text === ""){
+      return 
+    }
+    const newTodos = Object.assign({}, todos, {[Date.now()]: {text, work: working}})
+    setText("");
+  }
 
   return (
     <View style={styles.container}>
@@ -50,7 +59,12 @@ function App(): React.JSX.Element {
         </TouchableOpacity>
       </View>
       <View>
-        <TextInput placeholder={working ? "Add a To do" : "Where do you want to go?"}
+        <TextInput 
+          onSubmitEditing={addTodo}
+          placeholder={working ? "Add a To do" : "Where do you want to go?"}
+          onChangeText={onChangeText}
+          returnKeyType="done"
+          clearTextOnFocus
           style={styles.input} />
       </View>
     </View>
@@ -77,7 +91,9 @@ const styles = StyleSheet.create({
     backgroundColor:"white",
     paddingVertical: 15,
     paddingHorizontal: 20,
-    borderRadius: 20
+    borderRadius: 20,
+    marginTop: 15,
+    fontSize: 15
   }
 });
 
