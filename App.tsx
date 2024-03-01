@@ -16,7 +16,7 @@ import {
   useColorScheme,
   View,
   TouchableOpacity,
-  TextInput
+  TextInput,
 } from 'react-native';
 
 import {
@@ -38,7 +38,7 @@ function App(): React.JSX.Element {
   const travel = () => setWorking(false);
   const work = () => setWorking(true);
   const [text, setText] = useState("");
-  const [todos, setTodos] = useState({});
+  const [todos, setTodos] = useState<any>({});
   const onChangeText = (payload: string) => setText(payload);
   const addTodo = () => {
     if (text === ""){
@@ -67,6 +67,13 @@ function App(): React.JSX.Element {
           clearTextOnFocus
           style={styles.input} />
       </View>
+      <ScrollView>
+        {Object.keys(todos).map((key) => (
+          <View key={key as string}>
+            <Text>{todos[key].text}</Text>
+          </View>
+        ))}        
+      </ScrollView>
     </View>
   );
 }
