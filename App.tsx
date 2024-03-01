@@ -48,6 +48,7 @@ function App(): React.JSX.Element {
       ...todos,
       [Date.now()]: { text, work: working },
       };
+      setTodos(newToDos)
     setText("");
   }
 
@@ -67,6 +68,7 @@ function App(): React.JSX.Element {
           placeholder={working ? "Add a To do" : "Where do you want to go?"}
           onChangeText={onChangeText}
           returnKeyType="done"
+          clearTextOnFocus
           style={styles.input} />
       </View>
       <ScrollView>
@@ -102,13 +104,17 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     borderRadius: 20,
     marginTop: 15,
-    fontSize: 15
+    fontSize: 15,
+    marginBottom:25,
   },
   todo:{
-
+    backgroundColor:"white",
+    marginTop:15,
+    padding:25,
+    borderRadius: 20,
   },
   todoText:{
-    color:"white",
+    
   }
 });
 
