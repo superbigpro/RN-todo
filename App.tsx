@@ -15,7 +15,8 @@ import {
   Text,
   useColorScheme,
   View,
-  TouchableOpacity
+  TouchableOpacity,
+  TextInput
 } from 'react-native';
 
 import {
@@ -48,6 +49,10 @@ function App(): React.JSX.Element {
         <Text style={{...styles.btnText, color : working ? theme.grey: "white"}}>Travel</Text>
         </TouchableOpacity>
       </View>
+      <View>
+        <TextInput placeholder={working ? "Add a To do" : "Where do you want to go?"}
+          style={styles.input} />
+      </View>
     </View>
   );
 }
@@ -67,6 +72,9 @@ const styles = StyleSheet.create({
     fontSize:40,
     color: "white",
     fontWeight:"600",
+  },
+  input:{
+    backgroundColor:"white"
   }
 });
 
