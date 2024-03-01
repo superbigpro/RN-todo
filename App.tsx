@@ -5,7 +5,7 @@
  * @format
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import type {PropsWithChildren} from 'react';
 import {
   SafeAreaView,
@@ -33,20 +33,19 @@ type SectionProps = PropsWithChildren<{
 }>;
 
 function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
+  const [working, setWorking] = useState(true);
 
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
+  const travel = () => setWorking(false);
+  const work = () => setWorking(true);
 
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={work}>
           <Text style={styles.btnText}>Work</Text>
         </TouchableOpacity>
-        <TouchableOpacity>
-          <Text style={styles.btnText}>Hard</Text>
+        <TouchableOpacity onPress={travel}>
+          <Text style={styles.btnText}>Travel</Text>
         </TouchableOpacity>
       </View>
     </View>
