@@ -18,6 +18,7 @@ import {
   TouchableOpacity,
   TextInput,
 } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import {
   Colors,
@@ -40,6 +41,9 @@ function App(): React.JSX.Element {
   const [text, setText] = useState("");
   const [todos, setTodos] = useState<any>({});
   const onChangeText = (payload: string) => setText(payload);
+  const saveTodos = (toSave:object) => {
+
+  };
   const addTodo = () => {
     if (text === ""){
       return 
@@ -48,7 +52,8 @@ function App(): React.JSX.Element {
       ...todos,
       [Date.now()]: { text, working },
       };
-      setTodos(newToDos)
+    setTodos(newToDos);
+    saveTodos(newToDos);
     setText("");
   }
 
