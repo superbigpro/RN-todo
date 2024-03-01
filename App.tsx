@@ -5,7 +5,7 @@
  * @format
  */
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import type {PropsWithChildren} from 'react';
 import {
   SafeAreaView,
@@ -34,6 +34,8 @@ type SectionProps = PropsWithChildren<{
   title: string;
 }>;
 
+const STORAGE_KEY = "@toDos"
+
 function App(): React.JSX.Element {
   const [working, setWorking] = useState(true);
   const travel = () => setWorking(false);
@@ -41,10 +43,11 @@ function App(): React.JSX.Element {
   const [text, setText] = useState("");
   const [todos, setTodos] = useState<any>({});
   const onChangeText = (payload: string) => setText(payload);
-  const saveTodos = (toSave:object) => {
-
+  const saveTodos = async (toSave:object) => {
+    const s = JSON.stringify(toSave)
+    await AsyncStorage.setItem(STORAGE_KEY, s)
   };
-  const addTodo = () => {
+  const addTodo = async () => {
     if (text === ""){
       return 
     }
@@ -53,10 +56,16 @@ function App(): React.JSX.Element {
       [Date.now()]: { text, working },
       };
     setTodos(newToDos);
-    saveTodos(newToDos);
+    await saveTodos(newToDos);
     setText("");
   }
-
+  const loadTodo = async () => {
+    const s = await AsyncStorage.getItem(STORAGE_KEY)
+    JSON.parse(s: String);
+  }
+  useEffect(() => {
+    loadTodo()
+  }, [])
   return (
     <View style={styles.container}>
       <View style={styles.header}>
