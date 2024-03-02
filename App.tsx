@@ -1,10 +1,3 @@
-/* *
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
 import React, { useEffect, useState } from 'react';
 import type {PropsWithChildren} from 'react';
 import {
@@ -17,16 +10,9 @@ import {
   View,
   TouchableOpacity,
   TextInput,
+  Alert
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
 
 import { theme } from './color';
 
@@ -78,6 +64,16 @@ function App(): React.JSX.Element {
   useEffect(() => {
     loadTodo()
   }, [])
+  const deleteTodo = async (key: string) => {
+    Alert.alert("정말 삭제하시겠습니까?", [
+      {text:"취소"},
+      {text:"확인"}
+    ]);
+    const newTodos = {...todos}
+    delete newTodos[key]
+    setTodos(newTodos);
+    await saveTodos(newTodos);
+  };
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -102,7 +98,11 @@ function App(): React.JSX.Element {
           todos[key].working === working ?
           <View style={styles.todo} key={key as string}>
             <Text style={styles.todoText}>{todos[key].text}</Text>
-          </View>: null
+            <TouchableOpacity onPress={() => deleteTodo(key)}>
+              <Text>❌</Text>
+            </TouchableOpacity>
+          </View>
+          : null
         ))} 
       </ScrollView>
     </View>
@@ -139,6 +139,9 @@ const styles = StyleSheet.create({
     marginVertical:6,
     padding:25,
     borderRadius: 17,
+    flexDirection: "row",
+    alignItems:"center",
+    justifyContent:"space-between",
   },
   todoText:{
     color: "white",
