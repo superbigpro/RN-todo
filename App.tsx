@@ -75,6 +75,7 @@ function App(): React.JSX.Element {
         },
         {
           text: "확인",
+          style:"destructive",
           onPress: async () => {
             const newTodos = {...todos}
             delete newTodos[key]
