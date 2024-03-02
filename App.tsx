@@ -65,10 +65,14 @@ function App(): React.JSX.Element {
     setText("");
   }
   const loadTodo = async () => {
-    const s = await AsyncStorage.getItem(STORAGE_KEY);
-    if (s !== null) {
-      const parsedData: IAsync = JSON.parse(s);
-      setTodos(parsedData);
+    try {
+      const s = await AsyncStorage.getItem(STORAGE_KEY);
+      if (s !== null) {
+        const parsedData: IAsync = JSON.parse(s);
+        setTodos(parsedData);
+      }
+    } catch (error) {
+      console.error('Error loading todos:', error);
     }
   }  
   useEffect(() => {
