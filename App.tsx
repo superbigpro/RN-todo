@@ -65,14 +65,26 @@ function App(): React.JSX.Element {
     loadTodo()
   }, [])
   const deleteTodo = async (key: string) => {
-    Alert.alert("정말 삭제하시겠습니까?", [
-      {text:"취소"},
-      {text:"확인"}
-    ]);
-    const newTodos = {...todos}
-    delete newTodos[key]
-    setTodos(newTodos);
-    await saveTodos(newTodos);
+    Alert.alert(
+      "정말 삭제하시겠습니까?",
+      "",
+      [
+        {
+          text: "취소",
+          style: "cancel"
+        },
+        {
+          text: "확인",
+          onPress: async () => {
+            const newTodos = {...todos}
+            delete newTodos[key]
+            setTodos(newTodos);
+            await saveTodos(newTodos);
+          }
+        }
+      ],
+      { cancelable: true }
+    );    
   };
   return (
     <View style={styles.container}>
