@@ -36,6 +36,11 @@ type SectionProps = PropsWithChildren<{
 
 const STORAGE_KEY = "@toDos"
 
+interface IAsync {
+  [key: string]: string | null;
+}
+
+
 function App(): React.JSX.Element {
   const [working, setWorking] = useState(true);
   const travel = () => setWorking(false);
@@ -60,9 +65,12 @@ function App(): React.JSX.Element {
     setText("");
   }
   const loadTodo = async () => {
-    const s = await AsyncStorage.getItem(STORAGE_KEY)
-    JSON.parse(s: String);
-  }
+    const s = await AsyncStorage.getItem(STORAGE_KEY);
+    if (s !== null) {
+      const parsedData: IAsync = JSON.parse(s);
+      setTodos(parsedData);
+    }
+  }  
   useEffect(() => {
     loadTodo()
   }, [])
